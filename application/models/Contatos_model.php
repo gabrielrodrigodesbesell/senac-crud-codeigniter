@@ -16,7 +16,7 @@ class Contatos_model extends CI_Model{
 
 	public function insert($fields){
 		$this->db->insert(self::table,$fields);
-		return $this->db->affected_rows();
+		return $this->db->insert_id();
 	}
 
 	public function get_where($where){

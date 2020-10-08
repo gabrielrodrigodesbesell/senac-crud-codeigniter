@@ -1,4 +1,4 @@
-<h1>Contatos</h1>
+<h1>Contatoss</h1>
 <?=anchor(base_url('contatos/create'),'Cadastrar contato');?>
 <?=br(3)?>
 <?=!empty($this->session->userdata('mensagem'))?$this->session->userdata('mensagem'):null;?>
@@ -11,7 +11,7 @@ if(!empty($contatos)){
 			echo "<td>{$k->id}</td>";
 			echo "<td>{$k->nome}</td>";
 			echo "<td>{$k->email}</td>";
-			echo "<td>{$k->arquivo}</td>";
+			echo "<td><img src='uploads/{$k->arquivo}' width='40'></td>";
 			echo "<td>";
 				echo anchor(base_url('contatos/update/'.$k->id),'Alterar');
 				echo ' | ';
