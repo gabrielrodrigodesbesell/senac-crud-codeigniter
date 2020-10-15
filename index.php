@@ -312,4 +312,11 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
+spl_autoload_register(function($class)
+{
+    if(strpos($class, 'CI_') !== 0)
+    {
+        @include_once( APPPATH . 'core/'. $class . '.php' );
+    }
+});
 require_once BASEPATH.'core/CodeIgniter.php';

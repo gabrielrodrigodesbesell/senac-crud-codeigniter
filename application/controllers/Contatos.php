@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Contatos extends CI_Controller {
+class Contatos extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
@@ -17,7 +17,7 @@ class Contatos extends CI_Controller {
 		if(!empty($id) && is_numeric($id)){
 		    $contato = $this->Contatos_model->get_where(array('id'=>$id));
 		    if($contato) {
-		        unlink('uploads/'.$contato->arquivo);
+		        unlink('uploads/contatos/'.$contato->arquivo);
                 $this->Contatos_model->delete(array('id' => $id));
                 $this->session->set_flashdata('mensagem', 'Contato removido com sucesso');
             }else{
@@ -39,7 +39,7 @@ class Contatos extends CI_Controller {
 	public function create_action(){
 		$this->_validationRules();
 		if ($this->form_validation->run() == FALSE){
-			$this->cadastrar();
+			$this->create();
 		}else{
 			$insert = array(
 				'nome'=>$this->input->post('nome'),
@@ -81,7 +81,7 @@ class Contatos extends CI_Controller {
 	public function update_action($id){
         $this->_validationRules();
 		if ($this->form_validation->run() == FALSE){
-			$this->alterar($id);
+			$this->update($id);
 		}else{
             $arquivo = $this->input->post('arquivo_aux');
 			if($_FILES['arquivo']['name']){
@@ -110,7 +110,7 @@ class Contatos extends CI_Controller {
 		}
 	}
     final function _configsUpload(){
-        $config['upload_path']          = './uploads/';
+        $config['upload_path']          = './uploads/contatos/';
         @mkdir($config['upload_path']);
         $config['allowed_types']        = 'gif|jpg|png|pdf';
         $config['max_size']             = 2048;
